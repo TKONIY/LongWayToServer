@@ -70,10 +70,10 @@ int main()
             if (events[i].data.fd == server_fd) {
                 printf("accept\n");
                 /*accept*/
-                // sockaddr_in client_addr;
-                // socklen_t addr_len = sizeof(client_addr);
+                sockaddr_in client_addr;
+                socklen_t addr_len = sizeof(client_addr);
                 int client_fd;
-                check(client_fd = accept(server_fd, NULL, NULL), "accept() failed");
+                check(client_fd = accept(server_fd, (sockaddr*)&client_addr, &addr_len), "accept() failed");
                 /*epoll add client_fd*/
                 ev.data.fd = client_fd;
                 ev.events = EPOLLIN;
